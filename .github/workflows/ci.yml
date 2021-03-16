@@ -28,9 +28,9 @@ jobs:
 
       - run: yarn install
 
-      - run: yarn lint
+#      - run: yarn lint
 
-      - run: yarn test
+#      - run: yarn test
 
       - name: Execute Action
         uses: ./
