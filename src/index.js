@@ -9,23 +9,21 @@ try {
         return
     }
 
+    const octokit = getOctokit(core.getInput("token"))
+
     const kc = new k8s.KubeConfig();
     kc.loadFromDefault();
     const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
     k8sApi.readNamespacedServiceStatus(core.getInput("loadbalancer"), core.getInput("namespace"))
-        .then((serviceStatus) => console.log(JSON.stringify(serviceStatus.body)))
+        .then((serviceStatus) => serviceStatus.body.status.loadBalancer.ingress[0].ip)
+        .then((ip) => ({
+            ...context.repo,
+            issue_number: context.payload.pull_request.number,
+            body: `Test: ${ip}`
+        }))
+        .then((payload) => octokit.issues.createComment(payload))
         .catch((e) => console.log(e))
-
-    const octokit = getOctokit(core.getInput("token"))
-
-    const payload = {
-        ...context.repo,
-        issue_number: context.payload.pull_request.number,
-        body: "Test"
-    }
-
-    octokit.issues.createComment(payload)
 } catch (error) {
     core.setFailed(error.message)
 }
