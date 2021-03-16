@@ -23,5 +23,5 @@ runs:
   main: dist/index.js
 
 branding:
-  icon: 'delete'
-  color: 'green'
+  icon: 'message-square'
+  color: 'gray-dark'
