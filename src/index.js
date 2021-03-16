@@ -3,7 +3,7 @@ const {context} = require("@actions/github")
 const {getOctokit} = require("@actions/github")
 
 try {
-    const github_token = core.getInput("GITHUB_TOKEN")
+    const github_token = core.getInput("token")
 
     if (context.payload.pull_request == null) {
         core.setFailed("No pull request found.")
