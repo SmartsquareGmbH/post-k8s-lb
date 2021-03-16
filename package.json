@@ -1,0 +1,30 @@
+{
+  "name": "post-k8s-lb",
+  "version": "0.1.0",
+  "description": "Github Action for posting the ip of a kubernetes service.",
+  "main": "dist/index.js",
+  "repository": "https://github.com/SmartsquareGmbH/post-k8s-lb",
+  "author": "Ruben Gees & Dennis Dierkes",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "ncc build src/index.js --license LICENSE.txt --target es2015 --minify",
+    "lint": "eslint --ext .js src --max-warnings 0",
+    "lint:fix": "eslint --ext .js src --max-warnings 0 --fix",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.25.1",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.6.3",
+    "prettier": "^2.1.2"
+  }
+}

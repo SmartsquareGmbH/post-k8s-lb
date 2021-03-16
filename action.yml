@@ -1,0 +1,29 @@
+name: Post Kubernetes Loadbalancer
+
+description: This action can be used to post the address of a kubernetes loadbalancer on a pull request.
+
+inputs:
+  namespace:
+    description: >-
+      Namespace the loadbalancer remains to.
+    required: true
+
+  loadbalancer:
+    description: >-
+      Name of the actual kubernetes service.
+    required: true
+
+  token:
+    description: >-
+      Token with the necessary scopes to add pull request comments.
+      Defaults to github.token scoped to the repo running the action.
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: node12
+  main: dist/index.js
+
+branding:
+  icon: 'delete'
+  color: 'green'
