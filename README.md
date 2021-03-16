@@ -10,10 +10,6 @@ new features without messing around with the technical details.
 
 ___
 
-* [Usage](#usage)
-* [Keep up-to-date with GitHub Dependabot](#keep-up-to-date-with-github-dependabot)
-* [Resources](#resources)
-
 ## :rocket: Usage
 
 This action uses the default kubernetes configuration so make sure that you have setup the cluster.
