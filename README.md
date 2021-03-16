@@ -8,8 +8,6 @@ This action will fetch the information about the given ingress and post the ip a
 @smartsquarehq use this action after we've deployed the preview of a pull request so that the reviews can explore the
 new features without messing around with the technical details.
 
-___
-
 ## :rocket: Usage
 
 This action uses the default kubernetes configuration so make sure that you have setup the cluster.
