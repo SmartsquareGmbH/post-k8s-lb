@@ -1,6 +1,6 @@
 name: CI
 
-on: [ push, pull_request ]
+on: [ pull_request ]
 
 jobs:
   build:
@@ -12,6 +12,14 @@ jobs:
       - name: Setup yarn cache directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Setup doctl
+        uses: digitalocean/action-doctl@v2.1.0
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Setup kubeconfig
+        run: doctl kubernetes cluster kubeconfig save k8s-1-19-6-do-0-fra1-1615538047579
 
       - name: Setup yarn cache
         uses: actions/cache@v2.1.2
@@ -28,6 +36,12 @@ jobs:
 
       - run: yarn install
 
-      - run: yarn lint
+#      - run: yarn lint
 
-      - run: yarn test
+#      - run: yarn test
+
+      - name: Execute Action
+        uses: ./
+        with:
+          namespace: "smartbot-production"
+          loadbalancer: "smartbot-production-emqx"
