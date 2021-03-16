@@ -4,9 +4,6 @@ const {getOctokit} = require("@actions/github")
 const k8s = require('@kubernetes/client-node');
 
 try {
-
-    const github_token = core.getInput("token")
-
     if (context.payload.pull_request == null) {
         core.setFailed("No pull request found.")
         return
@@ -18,9 +15,9 @@ try {
 
     k8sApi.readNamespacedServiceStatus(core.getInput("loadbalancer"), core.getInput("namespace"))
         .then((serviceStatus) => console.log(serviceStatus))
-        .catch(() => console.log("Failed to fetch service status."))
+        .catch((e) => console.log("Failed to fetch service status." + e))
 
-    const octokit = getOctokit(github_token)
+    const octokit = getOctokit(core.getInput("token"))
 
     const payload = {
         ...context.repo,
