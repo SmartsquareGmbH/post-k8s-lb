@@ -12,10 +12,11 @@ try {
     const kc = new k8s.KubeConfig();
     kc.loadFromDefault();
     const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
-
+    console.log(core.getInput("loadbalancer"))
+    console.log(core.getInput("namespace"))
     k8sApi.readNamespacedServiceStatus(core.getInput("loadbalancer"), core.getInput("namespace"))
         .then((serviceStatus) => console.log(serviceStatus))
-        .catch((e) => console.log("Failed to fetch service status." + e))
+        .catch((e) => console.log(e))
 
     const octokit = getOctokit(core.getInput("token"))
 
