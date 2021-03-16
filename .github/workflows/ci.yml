@@ -43,5 +43,5 @@ jobs:
       - name: Execute Action
         uses: ./
         with:
-          namespace: "Test"
-          loadbalancer: "Test-LB"
+          namespace: "smartbot-production"
+          loadbalancer: "smartbot-production-emqx"
