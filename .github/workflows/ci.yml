@@ -1,6 +1,6 @@
 name: CI
 
-on: [ push, pull_request ]
+on: [ pull_request ]
 
 jobs:
   build:
@@ -31,3 +31,6 @@ jobs:
       - run: yarn lint
 
       - run: yarn test
+
+      - name: Execute Action
+        uses: ./
