@@ -4,13 +4,11 @@ description: This action can be used to post the address of a kubernetes loadbal
 
 inputs:
   namespace:
-    description: >-
-      Namespace the loadbalancer remains to.
+    description: Namespace the loadbalancer remains to.
     required: true
 
   loadbalancer:
-    description: >-
-      Name of the actual kubernetes service.
+    description: Name of the actual kubernetes service.
     required: true
 
   token:

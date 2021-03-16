@@ -34,3 +34,6 @@ jobs:
 
       - name: Execute Action
         uses: ./
+        with:
+          namespace: "Test"
+          loadbalancer: "Test-LB"
