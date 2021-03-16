@@ -12,11 +12,13 @@ try {
 
     const octokit = getOctokit(github_token)
 
-    await octokit.issues.createComment({
+    const payload = {
         ...context.repo,
         issue_number: context.payload.pull_request.number,
         body: "Test"
-    });
+    }
+
+    octokit.issues.createComment(payload)
 } catch (error) {
     core.setFailed(error.message)
 }
