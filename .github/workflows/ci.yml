@@ -36,12 +36,4 @@ jobs:
 
       - run: yarn install
 
-#      - run: yarn lint
-
-#      - run: yarn test
-
-      - name: Execute Action
-        uses: ./
-        with:
-          namespace: "smartbot-production"
-          loadbalancer: "smartbot-production-emqx"
+      - run: yarn lint
