@@ -55,6 +55,12 @@ updates:
       interval: "daily"
 ```
 
+## :warning: Limitations
+
+- The action itself do not check for duplicate comments now.
+- Checking the load balancer status is not implemented yet. 
+- The action can only handle one load balancer at a time.
+
 ## :books: Resources
 
 * [werf](https://werf.io/)
