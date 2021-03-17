@@ -32,7 +32,7 @@ const run = async () => {
 
   const service = await promiseRetry(function (retry, number) {
     if (number > 1) {
-      console.log(`Retrying Attempt: ${number}.`)
+      console.log(`Retry Attempt: ${number}.`)
     }
 
     return fetchServiceStatus().catch(retry)
