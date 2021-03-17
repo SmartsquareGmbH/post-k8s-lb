@@ -1,4 +1,4 @@
-const {isLoadBalancer, hasExternalAddress, createComment} = require("../kubernetes")
+const {isLoadBalancer, hasExternalAddress, createComment} = require("./kubernetes.js")
 
 const core = require("@actions/core")
 const {context} = require("@actions/github")
