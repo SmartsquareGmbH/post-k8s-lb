@@ -1,6 +1,6 @@
 {
   "name": "post-k8s-lb",
-  "version": "0.1.0",
+  "version": "v0.2.0",
   "description": "Github Action for posting the ip of a kubernetes service.",
   "main": "dist/index.js",
   "repository": "https://github.com/SmartsquareGmbH/post-k8s-lb",
