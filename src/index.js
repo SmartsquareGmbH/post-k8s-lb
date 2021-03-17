@@ -1,29 +1,36 @@
+const {isLoadBalancer, hasExternalAddress, createComment} = require("../kubernetes")
+
 const core = require("@actions/core")
-const { context } = require("@actions/github")
-const { getOctokit } = require("@actions/github")
+const {context} = require("@actions/github")
+const {getOctokit} = require("@actions/github")
 const k8s = require("@kubernetes/client-node")
 
-const createComment = (response) => {
-  const externalIp = response.body.status.loadBalancer.ingress[0].ip
-  const name = response.body.metadata.name
+const run = async () => {
+    if (context.payload.pull_request == null) {
+        throw Error("No pull request found.")
+    }
 
-  return `${name} is now available at ${externalIp} :sunglasses:`
+    const octokit = getOctokit(core.getInput("token"))
+
+    const kc = new k8s.KubeConfig()
+    kc.loadFromDefault()
+    const k8sApi = kc.makeApiClient(k8s.CoreV1Api)
+
+    const response = await k8sApi.readNamespacedServiceStatus(core.getInput("loadbalancer"), core.getInput("namespace"))
+
+    if (!isLoadBalancer(response.body)) {
+        throw Error("Given service is not a load balancer.")
+    }
+
+    if (!hasExternalAddress(response.body)) {
+        throw Error("Given load balancer has no external ip assigned yet.")
+    }
+
+    const body = createComment(response.body)
+
+    octokit.issues.createComment({...context.repo, issue_number: context.payload.pull_request.number, body: body})
 }
 
-if (context.payload.pull_request == null) {
-  core.setFailed("No pull request found.")
-  return
-}
-
-const octokit = getOctokit(core.getInput("token"))
-
-const kc = new k8s.KubeConfig()
-kc.loadFromDefault()
-const k8sApi = kc.makeApiClient(k8s.CoreV1Api)
-
-k8sApi
-  .readNamespacedServiceStatus(core.getInput("loadbalancer"), core.getInput("namespace"))
-  .then((serviceStatus) => createComment(serviceStatus))
-  .then((body) => ({ ...context.repo, issue_number: context.payload.pull_request.number, body: body }))
-  .then((payload) => octokit.issues.createComment(payload))
-  .catch((e) => core.setFailed(e))
+run().then().catch((error) => {
+    core.setFailed(error.message)
+})
