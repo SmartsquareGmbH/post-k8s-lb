@@ -44,8 +44,8 @@ const run = async () => {
 
   try {
     const { data: comments } = octokit.issues.listComments({
-      owner: context.payload.repository.owner,
-      repo: context.payload.repository.name,
+      owner: "smartsquaregmbh",
+      repo: "post-k8s-lb",
       number: context.payload.pull_request.number,
     })
 
