@@ -43,7 +43,8 @@ const run = async () => {
   const octokit = getOctokit(core.getInput("token"))
 
   const { data: comments } = octokit.issues.listComments({
-    ...context.repo,
+    owner: context.payload.repository.owner,
+    repo: context.payload.repository.name,
     number: context.payload.pull_request.number,
   })
 
