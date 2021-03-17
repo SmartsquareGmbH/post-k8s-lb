@@ -1,6 +1,8 @@
 const isLoadBalancer = (service) => service.spec.type === "LoadBalancer"
 
-const hasExternalAddress = (service) => Object.prototype.hasOwnProperty.call(service.status.loadBalancer, "ingress")
+const hasExternalAddress = (service) => {
+  return service.status.loadBalancer.ingress && service.status.loadBalancer.ingress.length === 1
+}
 
 const createComment = (service) => {
   const externalIp = service.status.loadBalancer.ingress[0].ip
