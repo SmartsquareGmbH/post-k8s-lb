@@ -59,7 +59,6 @@ updates:
 
 - The action itself do not check for duplicate comments now.
 - The action can only handle one load balancer at a time.
-- The action do not wait for an ip address to be assigned.
 
 ## :books: Resources
 
