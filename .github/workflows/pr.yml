@@ -40,4 +40,4 @@ jobs:
         uses: ./
         with:
           namespace: "smartbot-production"
-          loadbalancer: "smartbot-production-"
+          loadbalancer: "smartbot-production-emqx"
